@@ -8,8 +8,8 @@ import lombok.ToString;
 
 import java.util.Set;
 
-@Getter
 @Setter
+@Getter
 @NoArgsConstructor
 @ToString
 public class ManagerDao {

@@ -11,8 +11,8 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@Getter
 @Setter
+@Getter
 @Entity
 @NoArgsConstructor
 public class Quiz {

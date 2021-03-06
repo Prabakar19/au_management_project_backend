@@ -1,16 +1,18 @@
 package com.ms.au_management_project.response;
 
+import com.ms.au_management_project.entity.Quiz;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.Set;
 
-@Getter
 @Setter
+@Getter
 @NoArgsConstructor
 public class AssessmentResponse {
-    private boolean isValid;
+    private boolean valid;
     private String message;
 
     private Integer assessmentId;
@@ -29,8 +31,10 @@ public class AssessmentResponse {
 
     private Date lastUpdated;
 
-    public AssessmentResponse(boolean isValid, String message, Integer assessmentId, String assessmentTitle, Integer managerId, String type, Integer score, Integer courseId, String description, Date lastUpdated) {
-        this.isValid = isValid;
+    private Set<Quiz> quizSet;
+
+    public AssessmentResponse(boolean valid, String message, Integer assessmentId, String assessmentTitle, Integer managerId, String type, Integer score, Integer courseId, String description, Date lastUpdated, Set<Quiz> quizSet) {
+        this.valid = valid;
         this.message = message;
         this.assessmentId = assessmentId;
         this.assessmentTitle = assessmentTitle;
@@ -40,5 +44,6 @@ public class AssessmentResponse {
         this.courseId = courseId;
         this.description = description;
         this.lastUpdated = lastUpdated;
+        this.quizSet = quizSet;
     }
 }

@@ -25,7 +25,7 @@ public class TrainingMaterial {
     private Integer assessmentId;
 
     @Column(name = "material")
-    @JsonIgnore
+//    @JsonIgnore
     private byte[] material;
 
     public TrainingMaterial(@NotNull String title, @NotNull Integer assessmentId, @NotNull byte[] material) {

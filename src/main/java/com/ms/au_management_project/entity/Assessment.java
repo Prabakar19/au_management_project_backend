@@ -46,7 +46,7 @@ public class Assessment {
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastUpdated;
 
-    @OneToMany( fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @OneToMany( fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "assessmentId")
     private Set<Quiz> quizSet;
 

@@ -24,10 +24,10 @@ public class AssessmentServiceImpl implements AssessmentService {
             Date date = new Date();
             assessment.setLastUpdated(date);
             Assessment assessment1 = assessmentRepository.save(assessment);
-            return  new AssessmentResponse( true, "assessment added", assessment1.getAssessmentId(), assessment1.getAssessmentTitle(), assessment1.getManagerId(), assessment1.getType(), assessment1.getScore(), assessment1.getCourseId(), assessment1.getDescription(), assessment1.getLastUpdated());
+            return  new AssessmentResponse( true, "assessment added", assessment1.getAssessmentId(), assessment1.getAssessmentTitle(), assessment1.getManagerId(), assessment1.getType(), assessment1.getScore(), assessment1.getCourseId(), assessment1.getDescription(), assessment1.getLastUpdated(), assessment1.getQuizSet());
         }
         catch (Exception e){
-            return new AssessmentResponse(false, "assessment not added", 0, "", 0, "", 0, 0, "", null);
+            return new AssessmentResponse(false, "assessment not added", 0, "", 0, "", 0, 0, "", null, null);
         }
     }
 
@@ -36,9 +36,13 @@ public class AssessmentServiceImpl implements AssessmentService {
         Optional<Assessment> optionalAssessment = assessmentRepository.findById(id);
         Assessment assessment1 = optionalAssessment.orElse(null);
         if(assessment1 != null){
-            return  new AssessmentResponse( true, "success", assessment1.getAssessmentId(), assessment1.getAssessmentTitle(), assessment1.getManagerId(), assessment1.getType(), assessment1.getScore(), assessment1.getCourseId(), assessment1.getDescription(), assessment1.getLastUpdated());
+            return  new AssessmentResponse( true, "success", assessment1.getAssessmentId(), assessment1.getAssessmentTitle(), assessment1.getManagerId(), assessment1.getType(), assessment1.getScore(), assessment1.getCourseId(), assessment1.getDescription(), assessment1.getLastUpdated(), assessment1.getQuizSet());
         }
-        return new AssessmentResponse(false, "not able to get assessment", 0, "", 0, "", 0, 0, "", null);
+        AssessmentResponse assessmentResponse = new AssessmentResponse();
+        assessmentResponse.setAssessmentId(0);
+        assessmentResponse.setValid(false);
+        assessmentResponse.setMessage("not able to get assessment");
+        return assessmentResponse;
 
     }
 
@@ -65,9 +69,9 @@ public class AssessmentServiceImpl implements AssessmentService {
 
             assessmentRepository.save(assessment1);
 
-            return new AssessmentResponse( true, "assessment updated", assessment1.getAssessmentId(), assessment1.getAssessmentTitle(), assessment1.getManagerId(), assessment1.getType(), assessment1.getScore(), assessment1.getCourseId(), assessment1.getDescription(), assessment1.getLastUpdated());
+            return new AssessmentResponse( true, "assessment updated", assessment1.getAssessmentId(), assessment1.getAssessmentTitle(), assessment1.getManagerId(), assessment1.getType(), assessment1.getScore(), assessment1.getCourseId(), assessment1.getDescription(), assessment1.getLastUpdated(), assessment1.getQuizSet());
         }
-        return new AssessmentResponse(false, "assessment is not present", 0, "", 0, "", 0, 0, "", null);
+        return new AssessmentResponse(false, "assessment is not present", 0, "", 0, "", 0, 0, "", null, null);
     }
 
     @Override

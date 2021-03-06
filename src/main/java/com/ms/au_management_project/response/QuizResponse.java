@@ -9,7 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class QuizResponse {
 
-    private boolean isValid;
+    private boolean valid;
     private String message;
 
     private Integer quizId;
@@ -28,8 +28,8 @@ public class QuizResponse {
 
     private String answer;
 
-    public QuizResponse(boolean isValid, String message, Integer quizId, Integer assessmentId, String question, String option1, String option2, String option3, String option4, String answer) {
-        this.isValid = isValid;
+    public QuizResponse(boolean valid, String message, Integer quizId, Integer assessmentId, String question, String option1, String option2, String option3, String option4, String answer) {
+        this.valid = valid;
         this.message = message;
         this.quizId = quizId;
         this.assessmentId = assessmentId;

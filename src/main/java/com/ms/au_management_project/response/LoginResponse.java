@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 public class LoginResponse {
-    private boolean isValid;
+    private boolean valid;
     private String message;
     private Integer managerId;
 
@@ -19,8 +19,8 @@ public class LoginResponse {
     private String password;
 
 
-    public LoginResponse(boolean isValid, String message, Integer managerId, String managerName, String emailId, String password) {
-        this.isValid = isValid;
+    public LoginResponse(boolean valid, String message, Integer managerId, String managerName, String emailId, String password) {
+        this.valid = valid;
         this.message = message;
         this.managerId = managerId;
         this.managerName = managerName;
