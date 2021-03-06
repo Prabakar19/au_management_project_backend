@@ -25,4 +25,8 @@ public class AssessmentDao {
     private String description;
 
     private Date lastUpdated;
+
+    public AssessmentDao(Integer assessmentId){
+        this.assessmentId = assessmentId;
+    }
 }

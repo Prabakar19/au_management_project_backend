@@ -30,7 +30,6 @@ public class Assignment {
     @NotNull
     private String description;
 
-    @NotNull
     private Integer assessmentId;
 
     @NotNull

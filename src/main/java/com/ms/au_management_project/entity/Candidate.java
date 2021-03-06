@@ -4,12 +4,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
+import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Setter
@@ -18,19 +16,29 @@ import java.util.Date;
 public class Candidate {
 
     @Id
-    @NotNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer candidateId;
 
-    @NotNull
     @Size(min = 2, max = 30)
     private String candidateName;
 
-    @NotNull
     private Date joinDate;
 
     @Column(unique = true)
     private String emailId;
 
-    @NotNull
     private String location;
+
+    @OneToMany(mappedBy = "candidate")
+    Set<CandidateAssessment> candidateAssessmentSet;
+
+    public Candidate(Integer candidateId){
+        this.candidateId = candidateId;
+    }
+
+    public Candidate(@Size(min = 2, max = 30) String candidateName, String emailId, String location) {
+        this.candidateName = candidateName;
+        this.emailId = emailId;
+        this.location = location;
+    }
 }

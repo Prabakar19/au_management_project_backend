@@ -1,5 +1,6 @@
 package com.ms.au_management_project.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,28 +22,22 @@ public class Assessment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer assessmentId;
 
-    @NotNull
     private String assessmentTitle;
 
-    @NotNull
     private Integer managerId;
 
-    @NotNull
     @Column(columnDefinition = "VARCHAR(10) CHECK ( type IN ('QUIZ','ASSIGNMENT','PROJECT'))")
     private String type;
 
-    @NotNull
+
     @Min(5)
     private Integer score;
 
-    @NotNull
     private Integer courseId;
 
-    @NotNull
     @Size(min = 2, max = 50)
     private String description;
 
-    @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastUpdated;
 
@@ -54,15 +49,19 @@ public class Assessment {
     @JoinColumn(name = "assessmentId")
     private Set<Assignment> assignments;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "assessmentId")
     private Set<Project> projects;
 
-    @OneToMany( fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @OneToMany( fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "assessmentId")
     private Set<TrainingMaterial> trainingMaterials;
 
-    public Assessment(@NotNull String assessmentTitle, @NotNull Integer managerId, @NotNull @Size(min = 4, max = 10) String type, @NotNull @Min(5) Integer score, @NotNull Integer courseId, @NotNull @Size(min = 2, max = 50) String description) {
+    @OneToMany(mappedBy = "assessment", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @JsonIgnore
+    private Set<CandidateAssessment> candidateAssessmentSet;
+
+    public Assessment(String assessmentTitle, Integer managerId, @Size(min = 4, max = 10) String type, @Min(5) Integer score, Integer courseId, @Size(min = 2, max = 50) String description) {
         this.assessmentTitle = assessmentTitle;
         this.managerId = managerId;
         this.type = type;
@@ -71,7 +70,7 @@ public class Assessment {
         this.description = description;
     }
 
-    public Assessment(@NotNull String assessmentTitle, @NotNull Integer managerId, @NotNull String type, @NotNull @Min(5) Integer score, @NotNull Integer courseId, @NotNull @Size(min = 2, max = 50) String description, @NotNull Date lastUpdated) {
+    public Assessment(String assessmentTitle, Integer managerId, String type,  @Min(5) Integer score, Integer courseId, @Size(min = 2, max = 50) String description, Date lastUpdated) {
         this.assessmentTitle = assessmentTitle;
         this.managerId = managerId;
         this.type = type;
@@ -79,5 +78,9 @@ public class Assessment {
         this.courseId = courseId;
         this.description = description;
         this.lastUpdated = lastUpdated;
+    }
+
+    public Assessment(Integer assessmentId){
+        this.assessmentId = assessmentId;
     }
 }

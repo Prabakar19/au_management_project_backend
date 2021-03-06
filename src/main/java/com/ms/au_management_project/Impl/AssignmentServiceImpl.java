@@ -2,7 +2,6 @@ package com.ms.au_management_project.Impl;
 
 import com.ms.au_management_project.entity.Assignment;
 import com.ms.au_management_project.repository.AssignmentRepository;
-import com.ms.au_management_project.response.AssessmentResponse;
 import com.ms.au_management_project.response.AssignmentResponse;
 import com.ms.au_management_project.service.AssignmentService;
 import org.springframework.beans.factory.annotation.Autowired;

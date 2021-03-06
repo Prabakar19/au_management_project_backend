@@ -18,19 +18,25 @@ public class TrainingMaterial {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer materialId;
 
-    @NotNull
     private String title;
 
-    @NotNull
+
     private Integer assessmentId;
+
+    private String docName;
+    private String docType;
 
     @Column(name = "material")
 //    @JsonIgnore
+    @Lob
     private byte[] material;
 
-    public TrainingMaterial(@NotNull String title, @NotNull Integer assessmentId, @NotNull byte[] material) {
+
+    public TrainingMaterial(@NotNull String title, Integer assessmentId, String docName, String docType, byte[] material) {
         this.title = title;
         this.assessmentId = assessmentId;
+        this.docName = docName;
+        this.docType = docType;
         this.material = material;
     }
 }

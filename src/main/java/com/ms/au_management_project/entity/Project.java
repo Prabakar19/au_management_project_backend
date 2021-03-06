@@ -21,7 +21,6 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer projectId;
 
-    @NotNull
     private Integer assessmentId;
 
     @NotNull

@@ -25,7 +25,7 @@ public class AssessmentController {
         AssessmentResponse assessmentResponse = assessmentService.addAssessment(assessment);
 
         if(assessmentResponse.isValid()){
-            return ResponseEntity.ok(assessmentResponse);
+            return new ResponseEntity<>(assessmentResponse, HttpStatus.OK);
         }
         return new ResponseEntity<>(assessmentResponse, HttpStatus.CONFLICT);
     }
@@ -44,7 +44,7 @@ public class AssessmentController {
     public  ResponseEntity<AssessmentResponse> getAssessmentById(@PathVariable("id") Integer assessId){
         AssessmentResponse assessmentResponse = assessmentService.getAssessmentById(assessId);
 
-        if(assessmentResponse != null)
+        if(assessmentResponse.isValid())
             return new ResponseEntity<>(assessmentResponse, HttpStatus.OK);
         else
             return new ResponseEntity<>(assessmentResponse, HttpStatus.BAD_REQUEST);

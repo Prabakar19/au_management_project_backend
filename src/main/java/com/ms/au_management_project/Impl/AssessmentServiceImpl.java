@@ -24,10 +24,10 @@ public class AssessmentServiceImpl implements AssessmentService {
             Date date = new Date();
             assessment.setLastUpdated(date);
             Assessment assessment1 = assessmentRepository.save(assessment);
-            return  new AssessmentResponse( true, "assessment added", assessment1.getAssessmentId(), assessment1.getAssessmentTitle(), assessment1.getManagerId(), assessment1.getType(), assessment1.getScore(), assessment1.getCourseId(), assessment1.getDescription(), assessment1.getLastUpdated(), assessment1.getQuizSet());
+            return  new AssessmentResponse( true, "assessment added", assessment1.getAssessmentId(), assessment1.getAssessmentTitle(), assessment1.getManagerId(), assessment1.getType(), assessment1.getScore(), assessment1.getCourseId(), assessment1.getDescription(), assessment1.getLastUpdated(), assessment1.getQuizSet(), assessment1.getAssignments(), assessment1.getProjects());
         }
         catch (Exception e){
-            return new AssessmentResponse(false, "assessment not added", 0, "", 0, "", 0, 0, "", null, null);
+            return new AssessmentResponse(false, "assessment not added", 0, "", 0, "", 0, 0, "", null, null, null, null);
         }
     }
 
@@ -36,7 +36,7 @@ public class AssessmentServiceImpl implements AssessmentService {
         Optional<Assessment> optionalAssessment = assessmentRepository.findById(id);
         Assessment assessment1 = optionalAssessment.orElse(null);
         if(assessment1 != null){
-            return  new AssessmentResponse( true, "success", assessment1.getAssessmentId(), assessment1.getAssessmentTitle(), assessment1.getManagerId(), assessment1.getType(), assessment1.getScore(), assessment1.getCourseId(), assessment1.getDescription(), assessment1.getLastUpdated(), assessment1.getQuizSet());
+            return  new AssessmentResponse( true, "success", assessment1.getAssessmentId(), assessment1.getAssessmentTitle(), assessment1.getManagerId(), assessment1.getType(), assessment1.getScore(), assessment1.getCourseId(), assessment1.getDescription(), assessment1.getLastUpdated(), assessment1.getQuizSet(), assessment1.getAssignments(), assessment1.getProjects());
         }
         AssessmentResponse assessmentResponse = new AssessmentResponse();
         assessmentResponse.setAssessmentId(0);
@@ -69,23 +69,24 @@ public class AssessmentServiceImpl implements AssessmentService {
 
             assessmentRepository.save(assessment1);
 
-            return new AssessmentResponse( true, "assessment updated", assessment1.getAssessmentId(), assessment1.getAssessmentTitle(), assessment1.getManagerId(), assessment1.getType(), assessment1.getScore(), assessment1.getCourseId(), assessment1.getDescription(), assessment1.getLastUpdated(), assessment1.getQuizSet());
+            return new AssessmentResponse( true, "assessment updated", assessment1.getAssessmentId(), assessment1.getAssessmentTitle(), assessment1.getManagerId(), assessment1.getType(), assessment1.getScore(), assessment1.getCourseId(), assessment1.getDescription(), assessment1.getLastUpdated(), assessment1.getQuizSet(), assessment1.getAssignments(), assessment1.getProjects());
         }
-        return new AssessmentResponse(false, "assessment is not present", 0, "", 0, "", 0, 0, "", null, null);
+        return new AssessmentResponse(false, "assessment is not present", 0, "", 0, "", 0, 0, "", null, null, null, null);
     }
 
     @Override
     public AssessmentResponse deleteAssessment(Integer id) {
+
         AssessmentResponse assessmentResponse = new AssessmentResponse();
         Optional<Assessment> assessment = assessmentRepository.findById(id);
 
 
         if(assessment.isPresent()) {
-            assessmentRepository.deleteById(id);
-            assessmentResponse.setValid(true);
-            assessmentResponse.setAssessmentId(id);
-            assessmentResponse.setMessage("assessment deleted");
-            return assessmentResponse;
+                assessmentRepository.delete(assessment.get());
+                assessmentResponse.setValid(true);
+                assessmentResponse.setAssessmentId(id);
+                assessmentResponse.setMessage("assessment deleted");
+                return assessmentResponse;
         }
         assessmentResponse.setValid(false);
         assessmentResponse.setAssessmentId(id);

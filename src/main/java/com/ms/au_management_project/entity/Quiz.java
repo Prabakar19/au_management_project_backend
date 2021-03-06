@@ -21,7 +21,7 @@ public class Quiz {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer quizId;
 
-    @NotNull
+//    @NotNull
     private Integer assessmentId;
 
     @NotNull

@@ -4,6 +4,7 @@ package com.ms.au_management_project.dao;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @Setter
@@ -16,5 +17,5 @@ public class TrainingMaterialDao {
 
     private Integer assessmentId;
 
-    private byte[] material;
+    private MultipartFile material;
 }

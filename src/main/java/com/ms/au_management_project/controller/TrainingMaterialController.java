@@ -1,16 +1,16 @@
 package com.ms.au_management_project.controller;
 
-import com.ms.au_management_project.dao.ProjectDao;
 import com.ms.au_management_project.dao.TrainingMaterialDao;
-import com.ms.au_management_project.entity.Project;
 import com.ms.au_management_project.entity.TrainingMaterial;
 import com.ms.au_management_project.response.AssessmentResponse;
-import com.ms.au_management_project.response.ProjectResponse;
 import com.ms.au_management_project.response.TrainingMaterialResponse;
 import com.ms.au_management_project.service.AssessmentService;
 import com.ms.au_management_project.service.TrainingMaterialService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,14 +32,22 @@ public class TrainingMaterialController {
 
         if(assessmentResponse.isValid()){
             trainingMaterialDao.setAssessmentId(assessId);
-            TrainingMaterial trainingMaterial = new TrainingMaterial(trainingMaterialDao.getTitle(), trainingMaterialDao.getAssessmentId(), trainingMaterialDao.getMaterial());
-            TrainingMaterialResponse trainingMaterialResponse = trainingMaterialService.addMaterial(trainingMaterial);
+            TrainingMaterialResponse trainingMaterialResponse = trainingMaterialService.addMaterial(trainingMaterialDao);
             if(trainingMaterialResponse.isValid())
                 return new ResponseEntity<>(trainingMaterialResponse, HttpStatus.OK);
             else
                 return new ResponseEntity<>(trainingMaterialResponse, HttpStatus.CONFLICT);
         }
         return new ResponseEntity<>(assessmentResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @GetMapping("/download/{id}")
+    public  ResponseEntity<ByteArrayResource> downloadFile(@PathVariable("id") Integer materialId){
+        TrainingMaterial trainingMaterial = trainingMaterialService.getMaterial(materialId);
+
+        return ResponseEntity.ok().contentType(MediaType.parseMediaType(trainingMaterial.getDocType()))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment:filename=\"" + trainingMaterial.getDocName() + "\"")
+                .body(new ByteArrayResource(trainingMaterial.getMaterial()));
     }
 
     @GetMapping("/{id}")
@@ -55,8 +63,7 @@ public class TrainingMaterialController {
 
     @PutMapping("id/{id}")
     public  ResponseEntity<TrainingMaterialResponse> updateProject(@PathVariable("id") Integer projectId, @RequestBody TrainingMaterialDao trainingMaterialDao){
-        TrainingMaterial trainingMaterial = new TrainingMaterial(trainingMaterialDao.getTitle(), trainingMaterialDao.getAssessmentId(), trainingMaterialDao.getMaterial());
-        TrainingMaterialResponse trainingMaterialResponse = trainingMaterialService.updateMaterial(projectId, trainingMaterial);
+        TrainingMaterialResponse trainingMaterialResponse = trainingMaterialService.updateMaterial(projectId, trainingMaterialDao);
 
         if(trainingMaterialResponse.isValid())
             return new ResponseEntity<>(trainingMaterialResponse, HttpStatus.OK);
