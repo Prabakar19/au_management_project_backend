@@ -29,7 +29,7 @@ public class QuizController {
         AssessmentResponse assessmentResponse =assessmentService.getAssessmentById(assessId);
         if(assessmentResponse.isValid() && assessmentResponse.getType().equals("QUIZ")) {
             quizDao.setAssessmentId(assessId);
-            Quiz quiz = new Quiz(quizDao.getAssessmentId(), quizDao.getQuestion(), quizDao.getOption1(), quizDao.getOption2(), quizDao.getOption3(), quizDao.getOption4(), quizDao.getAnswer());
+            Quiz quiz = new Quiz(quizDao.getAssessmentId(), quizDao.getQuestion(), quizDao.getOption1(), quizDao.getOption2(), quizDao.getOption3(), quizDao.getOption4(), quizDao.getAnswer(), quizDao.getScore());
 
             QuizResponse quizResponse = quizService.addQuiz(quiz);
 
@@ -54,7 +54,7 @@ public class QuizController {
     @PutMapping("id/{id}")
     public  ResponseEntity<QuizResponse> updateQuiz(@PathVariable("id") Integer quizId, @RequestBody QuizDao quizDao){
 
-        Quiz quiz = new Quiz(quizDao.getAssessmentId(), quizDao.getQuestion(), quizDao.getOption1(), quizDao.getOption2(), quizDao.getOption3(), quizDao.getOption4(), quizDao.getAnswer());
+        Quiz quiz = new Quiz(quizDao.getAssessmentId(), quizDao.getQuestion(), quizDao.getOption1(), quizDao.getOption2(), quizDao.getOption3(), quizDao.getOption4(), quizDao.getAnswer(), quizDao.getScore());
         QuizResponse quizResponse = quizService.updateQuiz(quizId, quiz);
 
         if(quizResponse.isValid())

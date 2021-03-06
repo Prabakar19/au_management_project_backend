@@ -22,7 +22,7 @@ public class CandidateController {
 
     @PostMapping("")
     public ResponseEntity<CandidateResponse> addCandidate(@RequestBody CandidateDao candidateDao){
-        Candidate candidate = new Candidate(candidateDao.getEmailId(), candidateDao.getCandidateName(), candidateDao.getLocation());
+        Candidate candidate = new Candidate( candidateDao.getCandidateName(), candidateDao.getEmailId(), candidateDao.getLocation());
         CandidateResponse candidateResponse = candidateService.addCandidate(candidate);
 
         if(candidateResponse.isValid()){

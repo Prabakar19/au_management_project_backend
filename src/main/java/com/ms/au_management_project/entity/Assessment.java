@@ -7,7 +7,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.Set;
@@ -29,8 +28,6 @@ public class Assessment {
     @Column(columnDefinition = "VARCHAR(10) CHECK ( type IN ('QUIZ','ASSIGNMENT','PROJECT'))")
     private String type;
 
-
-    @Min(5)
     private Integer score;
 
     private Integer courseId;

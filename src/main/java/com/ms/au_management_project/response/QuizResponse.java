@@ -28,7 +28,9 @@ public class QuizResponse {
 
     private String answer;
 
-    public QuizResponse(boolean valid, String message, Integer quizId, Integer assessmentId, String question, String option1, String option2, String option3, String option4, String answer) {
+    private Integer score;
+
+    public QuizResponse(boolean valid, String message, Integer quizId, Integer assessmentId, String question, String option1, String option2, String option3, String option4, String answer, Integer score) {
         this.valid = valid;
         this.message = message;
         this.quizId = quizId;
@@ -39,5 +41,6 @@ public class QuizResponse {
         this.option3 = option3;
         this.option4 = option4;
         this.answer = answer;
+        this.score = score;
     }
 }

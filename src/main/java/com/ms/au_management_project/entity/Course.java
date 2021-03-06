@@ -1,5 +1,6 @@
 package com.ms.au_management_project.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,7 +17,6 @@ import java.util.Set;
 public class Course {
 
     @Id
-    @NotNull
     private Integer courseId;
 
     @NotNull
@@ -40,10 +40,18 @@ public class Course {
     @JoinColumn(name = "courseId")
     private Set<Assessment> assessments;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "course")
+    Set<CandidateCourse> candidateCourseSet;
+
     @ManyToMany
     @JoinTable(name="Course_Candidate", joinColumns = {@JoinColumn(referencedColumnName = "courseId")}, inverseJoinColumns = {@JoinColumn(referencedColumnName = "candidateId")})
     private Set<Candidate>candidates;
 
+
+    public Course(Integer courseId){
+        this.courseId = courseId;
+    }
 
     public Course(@NotNull Integer courseId, @NotNull @Size(min = 2, max = 50) String courseName, @NotNull @Size(min = 2, max = 100) String courseDescription, @NotNull String skill, @NotNull String preRequisite, @NotNull Integer managerId) {
         this.courseId = courseId;

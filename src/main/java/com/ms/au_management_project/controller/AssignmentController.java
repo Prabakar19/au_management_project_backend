@@ -34,7 +34,7 @@ public class AssignmentController {
             AssignmentResponse assignmentResponse = assignmentService.addAssignment(assignment);
 
             if (assignmentResponse.isValid()) {
-                return new ResponseEntity<>(assessmentResponse, HttpStatus.OK);
+                return new ResponseEntity<>(assignmentResponse, HttpStatus.OK);
             }
         }
         return new ResponseEntity<>(assessmentResponse, HttpStatus.BAD_REQUEST);

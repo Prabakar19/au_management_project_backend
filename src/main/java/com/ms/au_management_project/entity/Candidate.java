@@ -1,5 +1,6 @@
 package com.ms.au_management_project.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -29,8 +30,13 @@ public class Candidate {
 
     private String location;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "candidate")
     Set<CandidateAssessment> candidateAssessmentSet;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "candidate")
+    Set<CandidateCourse> candidateCourseSet;
 
     public Candidate(Integer candidateId){
         this.candidateId = candidateId;

@@ -21,7 +21,6 @@ public class Quiz {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer quizId;
 
-//    @NotNull
     private Integer assessmentId;
 
     @NotNull
@@ -43,7 +42,10 @@ public class Quiz {
     @NotNull
     private String answer;
 
-    public Quiz(@NotNull Integer assessmentId, @NotNull @Size(min = 2, max = 500) String question, @NotNull String option1, @NotNull String option2, @NotNull String option3, @NotNull String option4, @NotNull String answer) {
+    @NotNull
+    private Integer score;
+
+    public Quiz(@NotNull Integer assessmentId, @NotNull @Size(min = 2, max = 500) String question, @NotNull String option1, @NotNull String option2, @NotNull String option3, @NotNull String option4, @NotNull String answer, @NotNull Integer score) {
         this.assessmentId = assessmentId;
         this.question = question;
         this.option1 = option1;
@@ -51,5 +53,6 @@ public class Quiz {
         this.option3 = option3;
         this.option4 = option4;
         this.answer = answer;
+        this.score = score;
     }
 }

@@ -1,8 +1,11 @@
 package com.ms.au_management_project.Impl;
 
+import com.ms.au_management_project.entity.Assessment;
 import com.ms.au_management_project.entity.Project;
 import com.ms.au_management_project.repository.ProjectRepository;
+import com.ms.au_management_project.response.AssessmentResponse;
 import com.ms.au_management_project.response.ProjectResponse;
+import com.ms.au_management_project.service.AssessmentService;
 import com.ms.au_management_project.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,10 +20,22 @@ public class ProjectServiceImpl implements ProjectService {
     @Autowired
     ProjectRepository projectRepository;
 
+    @Autowired
+    AssessmentService assessmentService;
+
     @Override
     public ProjectResponse addProject(Project project) {
         try{
             Project project1 = projectRepository.save(project);
+
+            //updating assessment score using project score
+            AssessmentResponse assessmentResponse = assessmentService.getAssessmentById(project1.getAssessmentId());
+            assessmentResponse.setScore(assessmentResponse.getScore() + project1.getTotalScore());
+
+            Assessment assessment = new Assessment(assessmentResponse.getAssessmentTitle(), assessmentResponse.getManagerId(), assessmentResponse.getType(), assessmentResponse.getScore(), assessmentResponse.getCourseId(), assessmentResponse.getDescription());
+            assessment.setAssessmentId(assessmentResponse.getAssessmentId());
+            assessmentService.updateAssessment(assessment.getAssessmentId(), assessment);
+
             return new ProjectResponse(true, "project added", project1.getProjectId(), project1.getAssessmentId(), project1.getTitle(), project1.getBuildScore(), project1.getProcessScore(), project1.getTestingScore(), project1.getTotalScore());
         }catch(Exception e){
             ProjectResponse projectResponse = new ProjectResponse();

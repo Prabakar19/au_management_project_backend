@@ -24,4 +24,6 @@ public class QuizDao {
     private String option4;
 
     private String answer;
+
+    private Integer score;
 }
