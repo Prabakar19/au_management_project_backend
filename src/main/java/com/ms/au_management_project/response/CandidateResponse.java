@@ -23,8 +23,9 @@ public class CandidateResponse {
     private String emailId;
 
     private String location;
+    private String password;
 
-    public CandidateResponse(boolean valid, String message, Integer candidateId, String candidateName, Date joinDate, String emailId, String location) {
+    public CandidateResponse(boolean valid, String message, Integer candidateId, String candidateName, Date joinDate, String emailId, String location, String password) {
         this.valid = valid;
         this.message = message;
         this.candidateId = candidateId;
@@ -32,5 +33,6 @@ public class CandidateResponse {
         this.joinDate = joinDate;
         this.emailId = emailId;
         this.location = location;
+        this.password = password;
     }
 }

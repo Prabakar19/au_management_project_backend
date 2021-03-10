@@ -51,7 +51,7 @@ public class QuizController {
     }
 
 
-    @PutMapping("id/{id}")
+    @PutMapping("/id/{id}")
     public  ResponseEntity<QuizResponse> updateQuiz(@PathVariable("id") Integer quizId, @RequestBody QuizDao quizDao){
 
         Quiz quiz = new Quiz(quizDao.getAssessmentId(), quizDao.getQuestion(), quizDao.getOption1(), quizDao.getOption2(), quizDao.getOption3(), quizDao.getOption4(), quizDao.getAnswer(), quizDao.getScore());

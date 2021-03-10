@@ -40,9 +40,31 @@ public class AssessmentController {
             return new ResponseEntity<>("not able list assessment", HttpStatus.BAD_REQUEST);
     }
 
+    @GetMapping("/manager/{id}")
+    public ResponseEntity<Object> getAllAssessmentByManagerId(@PathVariable("id") Integer managerId){
+        List<Assessment> assessmentList = assessmentService.getAllAssessmentByManagerId(managerId);
+
+        if(assessmentList != null)
+            return new ResponseEntity<>(assessmentList, HttpStatus.OK);
+        else
+            return new ResponseEntity<>("not able list assessment", HttpStatus.BAD_REQUEST);
+    }
+
     @GetMapping("/{id}")
     public  ResponseEntity<AssessmentResponse> getAssessmentById(@PathVariable("id") Integer assessId){
         AssessmentResponse assessmentResponse = assessmentService.getAssessmentById(assessId);
+
+        if(assessmentResponse.isValid())
+            return new ResponseEntity<>(assessmentResponse, HttpStatus.OK);
+        else
+            return new ResponseEntity<>(assessmentResponse, HttpStatus.BAD_REQUEST);
+    }
+
+
+
+    @GetMapping("/name/{name}")
+    public  ResponseEntity<AssessmentResponse> getAssessmentByName(@PathVariable("name") String assessName){
+        AssessmentResponse assessmentResponse = assessmentService.getAssessmentByName(assessName);
 
         if(assessmentResponse.isValid())
             return new ResponseEntity<>(assessmentResponse, HttpStatus.OK);

@@ -48,6 +48,20 @@ public class AssessmentServiceImpl implements AssessmentService {
     }
 
     @Override
+    public AssessmentResponse getAssessmentByName(String name) {
+        Optional<Assessment> optionalAssessment = assessmentRepository.findAssessmentByAssessmentTitle(name);
+        Assessment assessment1 = optionalAssessment.orElse(null);
+        if(assessment1 != null){
+            return  new AssessmentResponse( true, "success", assessment1.getAssessmentId(), assessment1.getAssessmentTitle(), assessment1.getManagerId(), assessment1.getType(), assessment1.getScore(), assessment1.getCourseId(), assessment1.getDescription(), assessment1.getLastUpdated(), assessment1.getQuizSet(), assessment1.getAssignments(), assessment1.getProjects());
+        }
+        AssessmentResponse assessmentResponse = new AssessmentResponse();
+        assessmentResponse.setAssessmentId(0);
+        assessmentResponse.setValid(false);
+        assessmentResponse.setMessage("not able to get assessment");
+        return assessmentResponse;
+    }
+
+    @Override
     public List<Assessment> getAllAssessment() {
         return assessmentRepository.findAll(Sort.by(Sort.Direction.DESC, "lastUpdated"));
     }
@@ -93,5 +107,10 @@ public class AssessmentServiceImpl implements AssessmentService {
         assessmentResponse.setAssessmentId(id);
         assessmentResponse.setMessage("assessment is not present in db");
         return assessmentResponse;
+    }
+
+    @Override
+    public List<Assessment> getAllAssessmentByManagerId(Integer managerId) {
+        return assessmentRepository.findAllAssessmentByManagerId(managerId);
     }
 }

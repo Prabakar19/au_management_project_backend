@@ -5,9 +5,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+import java.util.Optional;
+
 @Repository
 public interface AssessmentRepository extends JpaRepository<Assessment, Integer> {
-
-    @Query("DELETE FROM Assessment a WHERE a.assessmentId = ?1 ")
-    public void deleteByMyId(Integer id);
+    public Optional<Assessment> findAssessmentByAssessmentTitle(String name);
+    public List<Assessment> findAllAssessmentByManagerId(Integer mangerId);
 }

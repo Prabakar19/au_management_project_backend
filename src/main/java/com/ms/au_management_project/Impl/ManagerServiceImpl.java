@@ -39,4 +39,19 @@ public class ManagerServiceImpl implements ManagerService {
         loginResponse.setMessage("unauthorized user");
         return loginResponse;
     }
+
+    @Override
+    public Manager getManagerById(Integer id) {
+        try {
+            Optional<Manager> optionalManager = managerRepository.findById(id);
+
+            if (optionalManager.isPresent()) {
+                return optionalManager.get();
+            }
+
+        }catch (Exception e){
+            return null;
+        }
+        return null;
+    }
 }

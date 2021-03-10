@@ -20,4 +20,6 @@ public class CandidateDao {
     private String emailId;
 
     private String location;
+
+    private String password;
 }

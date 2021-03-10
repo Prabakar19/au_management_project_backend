@@ -36,7 +36,7 @@ public class ProjectServiceImpl implements ProjectService {
             assessment.setAssessmentId(assessmentResponse.getAssessmentId());
             assessmentService.updateAssessment(assessment.getAssessmentId(), assessment);
 
-            return new ProjectResponse(true, "project added", project1.getProjectId(), project1.getAssessmentId(), project1.getTitle(), project1.getBuildScore(), project1.getProcessScore(), project1.getTestingScore(), project1.getTotalScore());
+            return new ProjectResponse(true, "project added", project1.getProjectId(), project1.getAssessmentId(), project1.getTitle(), project1.getDescription(), project1.getBuildScore(), project1.getProcessScore(), project1.getTestingScore(), project1.getTotalScore());
         }catch(Exception e){
             ProjectResponse projectResponse = new ProjectResponse();
             project.setProjectId(0);
@@ -77,13 +77,14 @@ public class ProjectServiceImpl implements ProjectService {
             Project project1 = optionalProject.get();
 
             project1.setTitle(project.getTitle());
+            project1.setDescription(project.getDescription());
             project1.setBuildScore(project.getBuildScore());
             project1.setProcessScore(project.getProcessScore());
             project1.setTestingScore(project.getTestingScore());
             project1.setTotalScore(project.getTotalScore());
 
             projectRepository.save(project1);
-            return new ProjectResponse(true, "project updated", project1.getProjectId(), project1.getAssessmentId(), project1.getTitle(), project1.getBuildScore(), project1.getProcessScore(), project1.getTestingScore(), project1.getTotalScore());
+            return new ProjectResponse(true, "project updated", project1.getProjectId(), project1.getAssessmentId(), project1.getTitle(), project1.getDescription(), project1.getBuildScore(), project1.getProcessScore(), project1.getTestingScore(), project1.getTotalScore());
         }
 
         ProjectResponse projectResponse = new ProjectResponse();

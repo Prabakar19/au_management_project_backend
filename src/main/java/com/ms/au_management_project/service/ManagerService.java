@@ -7,4 +7,5 @@ public interface ManagerService {
 
     public String addManager(Manager manager);
     public LoginResponse getManagerByEmailId(String emailId);
+    public Manager getManagerById(Integer id);
 }

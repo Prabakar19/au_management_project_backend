@@ -15,6 +15,8 @@ public class ProjectDao {
 
     private String title;
 
+    private String description;
+
     private Integer buildScore;
 
     private Integer processScore;

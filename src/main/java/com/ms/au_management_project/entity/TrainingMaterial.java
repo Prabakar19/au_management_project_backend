@@ -27,7 +27,7 @@ public class TrainingMaterial {
     private String docType;
 
     @Column(name = "material")
-//    @JsonIgnore
+    @JsonIgnore
     @Lob
     private byte[] material;
 
@@ -38,5 +38,10 @@ public class TrainingMaterial {
         this.docName = docName;
         this.docType = docType;
         this.material = material;
+    }
+
+    public TrainingMaterial(String title, Integer assessmentId) {
+        this.title = title;
+        this.assessmentId = assessmentId;
     }
 }

@@ -30,7 +30,7 @@ public class ProjectController {
         AssessmentResponse assessmentResponse =assessmentService.getAssessmentById(assessId);
         if(assessmentResponse.isValid() && assessmentResponse.getType().equals("PROJECT")) {
             projectDao.setAssessmentId(assessId);
-            Project project = new Project(projectDao.getAssessmentId(), projectDao.getTitle(), projectDao.getBuildScore(), projectDao.getProcessScore(), projectDao.getTestingScore(), projectDao.getTotalScore());
+            Project project = new Project(projectDao.getAssessmentId(), projectDao.getTitle(), projectDao.getDescription(), projectDao.getBuildScore(), projectDao.getProcessScore(), projectDao.getTestingScore(), projectDao.getTotalScore());
 
 
             ProjectResponse projectResponse = projectService.addProject(project);
@@ -53,9 +53,9 @@ public class ProjectController {
     }
 
 
-    @PutMapping("id/{id}")
+    @PutMapping("/id/{id}")
     public  ResponseEntity<ProjectResponse> updateProject(@PathVariable("id") Integer projectId, @RequestBody ProjectDao projectDao){
-        Project project = new Project(projectDao.getAssessmentId(), projectDao.getTitle(), projectDao.getBuildScore(), projectDao.getProcessScore(), projectDao.getTestingScore(), projectDao.getTotalScore());
+        Project project = new Project(projectDao.getAssessmentId(), projectDao.getTitle(), projectDao.getDescription(), projectDao.getBuildScore(), projectDao.getProcessScore(), projectDao.getTestingScore(), projectDao.getTotalScore());
         ProjectResponse projectResponse = projectService.updateProject(projectId, project);
 
         if(projectResponse.isValid())

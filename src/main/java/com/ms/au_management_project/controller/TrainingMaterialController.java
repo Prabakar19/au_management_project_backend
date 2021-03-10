@@ -61,7 +61,7 @@ public class TrainingMaterialController {
     }
 
 
-    @PutMapping("id/{id}")
+    @PutMapping("/id/{id}")
     public  ResponseEntity<TrainingMaterialResponse> updateProject(@PathVariable("id") Integer projectId, @RequestBody TrainingMaterialDao trainingMaterialDao){
         TrainingMaterialResponse trainingMaterialResponse = trainingMaterialService.updateMaterial(projectId, trainingMaterialDao);
 

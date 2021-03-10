@@ -6,6 +6,8 @@ import com.ms.au_management_project.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CourseServiceImpl implements CourseService {
 
@@ -23,5 +25,10 @@ public class CourseServiceImpl implements CourseService {
         {
             return null;
         }
+    }
+
+    @Override
+    public List<Course> getAllCourses() {
+        return courseRepository.findAll();
     }
 }

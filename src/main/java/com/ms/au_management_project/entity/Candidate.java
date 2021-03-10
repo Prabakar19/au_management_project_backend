@@ -30,6 +30,8 @@ public class Candidate {
 
     private String location;
 
+    private String password;
+
     @JsonIgnore
     @OneToMany(mappedBy = "candidate")
     Set<CandidateAssessment> candidateAssessmentSet;
@@ -42,9 +44,10 @@ public class Candidate {
         this.candidateId = candidateId;
     }
 
-    public Candidate(@Size(min = 2, max = 30) String candidateName, String emailId, String location) {
+    public Candidate(@Size(min = 2, max = 30) String candidateName, String emailId, String location, String password) {
         this.candidateName = candidateName;
         this.emailId = emailId;
         this.location = location;
+        this.password = password;
     }
 }

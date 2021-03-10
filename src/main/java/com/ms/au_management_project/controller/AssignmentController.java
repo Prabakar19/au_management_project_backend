@@ -51,7 +51,7 @@ public class AssignmentController {
     }
 
 
-    @PutMapping("id/{id}")
+    @PutMapping("/id/{id}")
     public  ResponseEntity<AssignmentResponse> updateAssignment(@PathVariable("id") Integer assignmentId, @RequestBody AssignmentDao assignmentDao){
         Assignment assignment = new Assignment(assignmentDao.getTitle(), assignmentDao.getDescription(), assignmentDao.getAssessmentId(), assignmentDao.getTotalScore());
         AssignmentResponse assignmentResponse = assignmentService.updateAssignment(assignmentId, assignment);

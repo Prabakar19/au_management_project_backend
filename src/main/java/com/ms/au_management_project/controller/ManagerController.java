@@ -7,10 +7,7 @@ import com.ms.au_management_project.service.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/manager")
@@ -29,6 +26,15 @@ public class ManagerController {
         }
 
         return ResponseEntity.accepted().body("error");
+    }
+
+    @GetMapping("")
+    public ResponseEntity<Object> getManagerById(@RequestParam Integer id){
+        Manager manager = managerService.getManagerById(id);
+        if(manager != null){
+            return new ResponseEntity<>(manager, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
     @PostMapping("/login")
