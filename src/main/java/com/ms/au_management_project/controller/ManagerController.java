@@ -34,7 +34,7 @@ public class ManagerController {
         if(manager != null){
             return new ResponseEntity<>(manager, HttpStatus.OK);
         }
-        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(manager, HttpStatus.NOT_FOUND);
     }
 
     @PostMapping("/login")
@@ -47,6 +47,16 @@ public class ManagerController {
             }
             loginResponse.setMessage("Wrong Password");
             return new ResponseEntity<>(loginResponse,HttpStatus.UNAUTHORIZED);
+        }
+        return new ResponseEntity<>(loginResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @PostMapping("/googlelogin")
+    public ResponseEntity<LoginResponse> managerGoogleLogin(@RequestBody ManagerDao managerDao){
+        LoginResponse loginResponse = managerService.getManagerByEmailId(managerDao.getEmailId());
+
+        if(loginResponse.isValid()){
+                return new ResponseEntity<>(loginResponse, HttpStatus.OK);
         }
         return new ResponseEntity<>(loginResponse, HttpStatus.NOT_FOUND);
     }

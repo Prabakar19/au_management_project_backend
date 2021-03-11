@@ -1,10 +1,8 @@
 package com.ms.au_management_project.Impl;
 
 import com.ms.au_management_project.entity.Candidate;
-import com.ms.au_management_project.entity.Manager;
 import com.ms.au_management_project.repository.CandidateRepository;
 import com.ms.au_management_project.response.CandidateResponse;
-import com.ms.au_management_project.response.LoginResponse;
 import com.ms.au_management_project.service.CandidateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

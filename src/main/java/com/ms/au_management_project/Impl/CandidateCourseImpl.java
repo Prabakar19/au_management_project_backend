@@ -1,10 +1,10 @@
 package com.ms.au_management_project.Impl;
 
-import com.ms.au_management_project.entity.Candidate;
-import com.ms.au_management_project.entity.CandidateAssessment;
+
+
 import com.ms.au_management_project.entity.CandidateCourse;
 import com.ms.au_management_project.repository.CandidateCourseRepository;
-import com.ms.au_management_project.response.CandidateAssessmentResponse;
+
 import com.ms.au_management_project.response.CandidateCourseResponse;
 import com.ms.au_management_project.service.CandidateCourseService;
 import org.springframework.beans.factory.annotation.Autowired;

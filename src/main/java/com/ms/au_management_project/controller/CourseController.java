@@ -1,7 +1,6 @@
 package com.ms.au_management_project.controller;
 
 import com.ms.au_management_project.dao.CourseDao;
-import com.ms.au_management_project.entity.Assessment;
 import com.ms.au_management_project.entity.Course;
 import com.ms.au_management_project.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;

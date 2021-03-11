@@ -1,6 +1,5 @@
 package com.ms.au_management_project.repository;
 
-import com.ms.au_management_project.entity.Assignment;
 import com.ms.au_management_project.entity.Project;
 import org.springframework.data.jpa.repository.JpaRepository;
 

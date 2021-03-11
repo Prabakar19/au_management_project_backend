@@ -21,7 +21,6 @@ public class TrainingMaterialServiceImpl implements TrainingMaterialService {
 
     @Override
     public TrainingMaterialResponse addMaterial(TrainingMaterialDao trainingMaterialDao) {
-//        String docName = trainingMaterialDao.getMaterial().getOriginalFilename();
         try{
             TrainingMaterial trainingMaterial = new TrainingMaterial(trainingMaterialDao.getTitle(), trainingMaterialDao.getAssessmentId());
             TrainingMaterial trainingMaterial1 = trainingMaterialRepository.save(trainingMaterial);

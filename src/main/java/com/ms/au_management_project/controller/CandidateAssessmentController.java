@@ -9,10 +9,10 @@ import com.ms.au_management_project.service.CandidateAssessmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/candidateassess")
@@ -31,6 +31,16 @@ public class CandidateAssessmentController {
             return new ResponseEntity<>(candidateAssessmentResponse, HttpStatus.OK);
         }
         return new ResponseEntity<>(candidateAssessmentResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @GetMapping("/count/{id}")
+    public ResponseEntity<Object> getLocationCount(@PathVariable("id") Integer assessId){
+
+        Map<String, List<String>> response = candidateAssessmentService.locationCount(assessId);
+        if(response != null){
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return  new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
 }

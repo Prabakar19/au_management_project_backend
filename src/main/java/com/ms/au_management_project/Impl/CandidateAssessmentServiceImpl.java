@@ -7,6 +7,11 @@ import com.ms.au_management_project.service.CandidateAssessmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 @Service
 public class CandidateAssessmentServiceImpl implements CandidateAssessmentService {
 
@@ -24,5 +29,22 @@ public class CandidateAssessmentServiceImpl implements CandidateAssessmentServic
             candidateAssessmentResponse.setMessage("failed to add");
             return candidateAssessmentResponse;
         }
+    }
+
+    public Map<String, List<String>> locationCount(Integer assessId ){
+        List<String> response =  candidateAssessmentRepository.locationCount(assessId);
+
+        Map<String, List<String>> responseMap = new HashMap<>();
+        List<String> location = new ArrayList<>();
+        List<String> count = new ArrayList<>();
+        for(String s: response){
+            String[] str = s.split(",");
+            location.add(str[0]);
+            count.add(str[1]);
+        }
+        responseMap.put("location", location);
+        responseMap.put("count", count);
+
+        return responseMap;
     }
 }

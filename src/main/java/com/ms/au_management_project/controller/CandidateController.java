@@ -2,11 +2,8 @@ package com.ms.au_management_project.controller;
 
 
 import com.ms.au_management_project.dao.CandidateDao;
-import com.ms.au_management_project.dao.ManagerDao;
 import com.ms.au_management_project.entity.Candidate;
-import com.ms.au_management_project.entity.Manager;
 import com.ms.au_management_project.response.CandidateResponse;
-import com.ms.au_management_project.response.LoginResponse;
 import com.ms.au_management_project.service.CandidateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,6 +30,7 @@ public class CandidateController {
 
     @PostMapping("/login")
     public ResponseEntity<CandidateResponse> candidateLogin(@RequestBody CandidateDao candidateDao){
+
         CandidateResponse candidateResponse = candidateService.getCandidateByEmailId(candidateDao.getEmailId());
 
         if(candidateResponse.isValid()){
