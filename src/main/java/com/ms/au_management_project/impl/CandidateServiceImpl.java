@@ -1,4 +1,4 @@
-package com.ms.au_management_project.Impl;
+package com.ms.au_management_project.impl;
 
 import com.ms.au_management_project.entity.Candidate;
 import com.ms.au_management_project.repository.CandidateRepository;

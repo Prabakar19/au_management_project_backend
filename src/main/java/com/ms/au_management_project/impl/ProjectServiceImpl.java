@@ -1,4 +1,4 @@
-package com.ms.au_management_project.Impl;
+package com.ms.au_management_project.impl;
 
 import com.ms.au_management_project.entity.Assessment;
 import com.ms.au_management_project.entity.Project;
@@ -39,7 +39,6 @@ public class ProjectServiceImpl implements ProjectService {
             return new ProjectResponse(true, "project added", project1.getProjectId(), project1.getAssessmentId(), project1.getTitle(), project1.getDescription(), project1.getBuildScore(), project1.getProcessScore(), project1.getTestingScore(), project1.getTotalScore());
         }else{
             ProjectResponse projectResponse = new ProjectResponse();
-            project.setProjectId(0);
             projectResponse.setValid(false);
             projectResponse.setMessage("not added");
             return projectResponse;

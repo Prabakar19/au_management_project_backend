@@ -1,8 +1,7 @@
-package com.ms.au_management_project.Impl;
+package com.ms.au_management_project.impl;
 
 import com.ms.au_management_project.entity.Assessment;
 import com.ms.au_management_project.repository.AssessmentRepository;
-import com.ms.au_management_project.response.AssessmentResponse;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,10 +13,7 @@ import org.springframework.data.domain.Sort;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 
 @ExtendWith(MockitoExtension.class)

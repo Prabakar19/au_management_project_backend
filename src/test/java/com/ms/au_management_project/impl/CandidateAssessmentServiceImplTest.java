@@ -1,4 +1,4 @@
-package com.ms.au_management_project.Impl;
+package com.ms.au_management_project.impl;
 
 import com.ms.au_management_project.entity.Assessment;
 import com.ms.au_management_project.entity.Candidate;
@@ -14,8 +14,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 class CandidateAssessmentServiceImplTest {

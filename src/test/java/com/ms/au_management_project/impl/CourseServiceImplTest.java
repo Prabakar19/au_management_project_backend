@@ -1,7 +1,6 @@
-package com.ms.au_management_project.Impl;
+package com.ms.au_management_project.impl;
 
 import com.ms.au_management_project.entity.Course;
-import com.ms.au_management_project.entity.Manager;
 import com.ms.au_management_project.repository.CourseRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -13,8 +12,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 class CourseServiceImplTest {

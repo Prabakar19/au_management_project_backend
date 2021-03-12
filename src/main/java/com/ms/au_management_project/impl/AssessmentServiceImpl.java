@@ -1,4 +1,4 @@
-package com.ms.au_management_project.Impl;
+package com.ms.au_management_project.impl;
 
 import com.ms.au_management_project.entity.Assessment;
 import com.ms.au_management_project.repository.AssessmentRepository;
@@ -27,7 +27,7 @@ public class AssessmentServiceImpl implements AssessmentService {
             Assessment assessment1 = assessmentRepository.save(assessment);
             return  new AssessmentResponse( true, "assessment added", assessment1.getAssessmentId(), assessment1.getAssessmentTitle(), assessment1.getManagerId(), assessment1.getType(), assessment1.getScore(), assessment1.getCourseId(), assessment1.getDescription(), assessment1.getLastUpdated(), assessment1.getQuizSet(), assessment1.getAssignments(), assessment1.getProjects());
         }
-            return new AssessmentResponse(false, "assessment not added", 0, "", 0, "", 0, 0, "", null, null, null, null);
+        return new AssessmentResponse(false, "assessment not added", 0, "", 0, "", 0, 0, "", null, null, null, null);
     }
 
     @Override
@@ -94,11 +94,11 @@ public class AssessmentServiceImpl implements AssessmentService {
 
 
         if(assessment.isPresent()) {
-                assessmentRepository.delete(assessment.get());
-                assessmentResponse.setValid(true);
-                assessmentResponse.setAssessmentId(id);
-                assessmentResponse.setMessage("assessment deleted");
-                return assessmentResponse;
+            assessmentRepository.delete(assessment.get());
+            assessmentResponse.setValid(true);
+            assessmentResponse.setAssessmentId(id);
+            assessmentResponse.setMessage("assessment deleted");
+            return assessmentResponse;
         }
         assessmentResponse.setValid(false);
         assessmentResponse.setAssessmentId(id);

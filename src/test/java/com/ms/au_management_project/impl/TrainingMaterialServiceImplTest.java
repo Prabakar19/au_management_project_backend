@@ -1,10 +1,8 @@
-package com.ms.au_management_project.Impl;
+package com.ms.au_management_project.impl;
 
 import com.ms.au_management_project.dao.TrainingMaterialDao;
-import com.ms.au_management_project.entity.Project;
 import com.ms.au_management_project.entity.TrainingMaterial;
 import com.ms.au_management_project.repository.TrainingMaterialRepository;
-import com.ms.au_management_project.response.TrainingMaterialResponse;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(MockitoExtension.class)
 class TrainingMaterialServiceImplTest {
 

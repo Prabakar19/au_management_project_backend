@@ -1,4 +1,4 @@
-package com.ms.au_management_project.Impl;
+package com.ms.au_management_project.impl;
 
 import com.ms.au_management_project.dao.TrainingMaterialDao;
 import com.ms.au_management_project.entity.TrainingMaterial;

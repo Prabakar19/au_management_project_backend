@@ -1,9 +1,8 @@
-package com.ms.au_management_project.Impl;
+package com.ms.au_management_project.impl;
 
 import com.ms.au_management_project.entity.Candidate;
 import com.ms.au_management_project.entity.CandidateCourse;
 import com.ms.au_management_project.entity.Course;
-import com.ms.au_management_project.repository.CandidateAssessmentRepository;
 import com.ms.au_management_project.repository.CandidateCourseRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -12,8 +11,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 class CandidateCourseImplTest {
