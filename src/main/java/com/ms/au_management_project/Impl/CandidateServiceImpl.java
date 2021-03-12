@@ -18,11 +18,11 @@ public class CandidateServiceImpl implements CandidateService {
 
     @Override
     public CandidateResponse addCandidate(Candidate candidate) {
-        try {
+        if(candidate!= null) {
             candidate.setJoinDate(new Date());
             Candidate candidate1 = candidateRepository.save(candidate);
             return new CandidateResponse(true, "candidate added", candidate1.getCandidateId(), candidate1.getCandidateName(), candidate1.getJoinDate(), candidate1.getEmailId(), candidate1.getLocation(), candidate1.getPassword());
-        }catch (Exception e) {
+        }else {
             CandidateResponse candidateResponse = new CandidateResponse();
             candidateResponse.setCandidateId(0);
             candidateResponse.setValid(false);

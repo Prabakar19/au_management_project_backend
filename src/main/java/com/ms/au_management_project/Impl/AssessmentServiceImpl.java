@@ -20,24 +20,21 @@ public class AssessmentServiceImpl implements AssessmentService {
 
     @Override
     public AssessmentResponse addAssessment(Assessment assessment) {
-        try{
+        if(assessment != null){
             Date date = new Date();
             assessment.setLastUpdated(date);
             assessment.setScore(0);
             Assessment assessment1 = assessmentRepository.save(assessment);
             return  new AssessmentResponse( true, "assessment added", assessment1.getAssessmentId(), assessment1.getAssessmentTitle(), assessment1.getManagerId(), assessment1.getType(), assessment1.getScore(), assessment1.getCourseId(), assessment1.getDescription(), assessment1.getLastUpdated(), assessment1.getQuizSet(), assessment1.getAssignments(), assessment1.getProjects());
         }
-        catch (Exception e){
             return new AssessmentResponse(false, "assessment not added", 0, "", 0, "", 0, 0, "", null, null, null, null);
-        }
     }
 
     @Override
     public AssessmentResponse getAssessmentById(Integer id) {
         Optional<Assessment> optionalAssessment = assessmentRepository.findById(id);
-        Assessment assessment1 = optionalAssessment.orElse(null);
-        if(assessment1 != null){
-            return  new AssessmentResponse( true, "success", assessment1.getAssessmentId(), assessment1.getAssessmentTitle(), assessment1.getManagerId(), assessment1.getType(), assessment1.getScore(), assessment1.getCourseId(), assessment1.getDescription(), assessment1.getLastUpdated(), assessment1.getQuizSet(), assessment1.getAssignments(), assessment1.getProjects());
+        if(optionalAssessment.isPresent()){
+            return  new AssessmentResponse( true, "success", optionalAssessment.get().getAssessmentId(), optionalAssessment.get().getAssessmentTitle(), optionalAssessment.get().getManagerId(), optionalAssessment.get().getType(), optionalAssessment.get().getScore(), optionalAssessment.get().getCourseId(), optionalAssessment.get().getDescription(), optionalAssessment.get().getLastUpdated(), optionalAssessment.get().getQuizSet(), optionalAssessment.get().getAssignments(), optionalAssessment.get().getProjects());
         }
         AssessmentResponse assessmentResponse = new AssessmentResponse();
         assessmentResponse.setAssessmentId(0);

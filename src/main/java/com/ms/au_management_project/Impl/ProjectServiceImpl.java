@@ -25,7 +25,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public ProjectResponse addProject(Project project) {
-        try{
+        if(project != null){
             Project project1 = projectRepository.save(project);
 
             //updating assessment score using project score
@@ -37,7 +37,7 @@ public class ProjectServiceImpl implements ProjectService {
             assessmentService.updateAssessment(assessment.getAssessmentId(), assessment);
 
             return new ProjectResponse(true, "project added", project1.getProjectId(), project1.getAssessmentId(), project1.getTitle(), project1.getDescription(), project1.getBuildScore(), project1.getProcessScore(), project1.getTestingScore(), project1.getTotalScore());
-        }catch(Exception e){
+        }else{
             ProjectResponse projectResponse = new ProjectResponse();
             project.setProjectId(0);
             projectResponse.setValid(false);
@@ -61,6 +61,7 @@ public class ProjectServiceImpl implements ProjectService {
             projectResponse.setProjectId(projectId);
             projectResponse.setValid(true);
             projectResponse.setMessage("successfully deleted");
+            return  projectResponse;
         }
 
         projectResponse.setProjectId(projectId);

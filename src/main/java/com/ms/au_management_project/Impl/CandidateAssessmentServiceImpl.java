@@ -20,10 +20,10 @@ public class CandidateAssessmentServiceImpl implements CandidateAssessmentServic
 
     @Override
     public CandidateAssessmentResponse addCandidateAssessment(CandidateAssessment candidateAssessment) {
-        try{
+        if(candidateAssessment != null){
             CandidateAssessment candidateAssessment1 = candidateAssessmentRepository.save(candidateAssessment);
             return new CandidateAssessmentResponse(true, "assessment mark added", candidateAssessment1.getAssessment().getAssessmentId(), candidateAssessment1.getCandidate().getCandidateId(), candidateAssessment1.getScore(), candidateAssessment1.getMaxScore(), candidateAssessment.getFeedback());
-        }catch(Exception e){
+        }else{
             CandidateAssessmentResponse candidateAssessmentResponse = new CandidateAssessmentResponse();
             candidateAssessmentResponse.setValid(false);
             candidateAssessmentResponse.setMessage("failed to add");

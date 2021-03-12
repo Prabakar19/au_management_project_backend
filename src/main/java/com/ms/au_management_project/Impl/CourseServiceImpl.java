@@ -17,14 +17,11 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public String addCourse(Course course) {
-        try{
+        if(course != null){
             courseRepository.save(course);
             return "course added";
         }
-        catch (Exception e)
-        {
-            return null;
-        }
+        return null;
     }
 
     @Override

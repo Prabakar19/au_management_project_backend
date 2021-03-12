@@ -17,12 +17,11 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     public String addManager(Manager manager) {
-        try{
+        if(manager != null){
             managerRepository.save(manager);
             return "manager added";
         }
-        catch (Exception e)
-        {
+        else{
             return null;
         }
     }
@@ -42,16 +41,10 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     public Manager getManagerById(Integer id) {
-        try {
+
             Optional<Manager> optionalManager = managerRepository.findById(id);
 
-            if (optionalManager.isPresent()) {
-                return optionalManager.get();
-            }
+        return optionalManager.orElse(null);
 
-        }catch (Exception e){
-            return null;
-        }
-        return null;
     }
 }

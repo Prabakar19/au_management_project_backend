@@ -21,11 +21,11 @@ public class TrainingMaterialServiceImpl implements TrainingMaterialService {
 
     @Override
     public TrainingMaterialResponse addMaterial(TrainingMaterialDao trainingMaterialDao) {
-        try{
+        if(trainingMaterialDao != null){
             TrainingMaterial trainingMaterial = new TrainingMaterial(trainingMaterialDao.getTitle(), trainingMaterialDao.getAssessmentId());
             TrainingMaterial trainingMaterial1 = trainingMaterialRepository.save(trainingMaterial);
             return new TrainingMaterialResponse(true, "material added", trainingMaterial1.getMaterialId(), trainingMaterial1.getTitle(), trainingMaterial1.getAssessmentId(), trainingMaterial1.getMaterial());
-        }catch(Exception e){
+        }else{
             TrainingMaterialResponse trainingMaterialResponse = new TrainingMaterialResponse();
             trainingMaterialResponse.setMaterialId(0);
             trainingMaterialResponse.setValid(false);
@@ -41,24 +41,19 @@ public class TrainingMaterialServiceImpl implements TrainingMaterialService {
 
     @Override
     public TrainingMaterialResponse updateMaterial(Integer id, TrainingMaterialDao trainingMaterialDao) {
-
-        String docName = trainingMaterialDao.getMaterial().getOriginalFilename();
-        try {
-            TrainingMaterial trainingMaterial = new TrainingMaterial(trainingMaterialDao.getTitle(), trainingMaterialDao.getAssessmentId(), docName, trainingMaterialDao.getMaterial().getContentType(), trainingMaterialDao.getMaterial().getBytes());
+        if(trainingMaterialDao != null) {
+            TrainingMaterial trainingMaterial = new TrainingMaterial(trainingMaterialDao.getTitle(), trainingMaterialDao.getAssessmentId());
             Optional<TrainingMaterial> optionalTrainingMaterial = trainingMaterialRepository.findById(id);
 
-        if(optionalTrainingMaterial.isPresent()){
-            TrainingMaterial trainingMaterial1 = optionalTrainingMaterial.get();
+            if (optionalTrainingMaterial.isPresent()) {
+                TrainingMaterial trainingMaterial1 = optionalTrainingMaterial.get();
 
-            trainingMaterial1.setTitle(trainingMaterial.getTitle());
-            trainingMaterial1.setMaterial(trainingMaterial.getMaterial());
-            trainingMaterialRepository.save(trainingMaterial1);
-            return new TrainingMaterialResponse(true, "material updated", trainingMaterial1.getMaterialId(), trainingMaterial1.getTitle(), trainingMaterial1.getAssessmentId(), trainingMaterial1.getMaterial());
+                trainingMaterial1.setTitle(trainingMaterial.getTitle());
+                trainingMaterial1.setMaterial(trainingMaterial.getMaterial());
+                trainingMaterialRepository.save(trainingMaterial1);
+                return new TrainingMaterialResponse(true, "material updated", trainingMaterial1.getMaterialId(), trainingMaterial1.getTitle(), trainingMaterial1.getAssessmentId(), trainingMaterial1.getMaterial());
+            }
         }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
         TrainingMaterialResponse trainingMaterialResponse = new TrainingMaterialResponse();
         trainingMaterialResponse.setMaterialId(id);
         trainingMaterialResponse.setValid(false);
@@ -76,8 +71,8 @@ public class TrainingMaterialServiceImpl implements TrainingMaterialService {
             trainingMaterialResponse.setMaterialId(id);
             trainingMaterialResponse.setValid(true);
             trainingMaterialResponse.setMessage("successfully deleted");
+            return trainingMaterialResponse;
         }
-
         trainingMaterialResponse.setMaterialId(id);
         trainingMaterialResponse.setValid(false);
         trainingMaterialResponse.setMessage("material not present");

@@ -18,10 +18,10 @@ public class CandidateCourseImpl implements CandidateCourseService {
 
     @Override
     public CandidateCourseResponse addCandidateCourse(CandidateCourse candidateCourse) {
-        try{
+        if(candidateCourse != null){
             CandidateCourse candidateCourse1 = candidateCourseRepository.save(candidateCourse);
             return new CandidateCourseResponse(true, "course mark added", candidateCourse1.getCandidate().getCandidateId(), candidateCourse1.getCourse().getCourseId(), candidateCourse1.getScore(), candidateCourse1.getMaxScore());
-        }catch(Exception e){
+        }else{
             CandidateCourseResponse candidateAssessmentResponse =  new CandidateCourseResponse();
             candidateAssessmentResponse.setValid(false);
             candidateAssessmentResponse.setMessage("course mask not added");

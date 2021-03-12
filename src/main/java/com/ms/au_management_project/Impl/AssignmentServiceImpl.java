@@ -25,7 +25,7 @@ public class AssignmentServiceImpl implements AssignmentService {
 
     @Override
     public AssignmentResponse addAssignment(Assignment assignment) {
-        try{
+        if(assignment != null){
             Assignment assignment1 = assignmentRepository.save(assignment);
 
             //updating assessment score using assignment score
@@ -38,7 +38,7 @@ public class AssignmentServiceImpl implements AssignmentService {
 
             return new AssignmentResponse(true, "assignment added", assignment1.getAssignmentId(), assignment1.getTitle() , assignment1.getDescription(), assignment1.getAssessmentId(), assignment1.getTotalScore());
         }
-        catch (Exception e)
+        else
         {
             AssignmentResponse assignmentResponse = new AssignmentResponse();
             assignmentResponse.setAssignmentId(0);
