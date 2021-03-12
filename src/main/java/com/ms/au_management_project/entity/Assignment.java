@@ -2,10 +2,10 @@ package com.ms.au_management_project.entity;
 
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -13,10 +13,11 @@ import javax.validation.constraints.Size;
 @Entity
 @Setter
 @Getter
+@NoArgsConstructor
 public class Assignment {
 
     @Id
-    @NotNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer assignmentId;
 
     @NotNull
@@ -24,10 +25,19 @@ public class Assignment {
     private String title;
 
     @NotNull
+    @Column( length = 100000 )
+    private String description;
+
     private Integer assessmentId;
 
     @NotNull
     @Min(5)
     private Integer totalScore;
 
+    public Assignment(@NotNull @Size(min = 2, max = 50) String title, @NotNull String description, @NotNull Integer assessmentId, @NotNull @Min(5) Integer totalScore) {
+        this.title = title;
+        this.description = description;
+        this.assessmentId = assessmentId;
+        this.totalScore = totalScore;
+    }
 }

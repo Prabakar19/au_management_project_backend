@@ -1,6 +1,8 @@
 package com.ms.au_management_project.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -11,10 +13,10 @@ import java.util.Set;
 @Setter
 @Getter
 @Entity
+@NoArgsConstructor
 public class Course {
 
     @Id
-    @NotNull
     private Integer courseId;
 
     @NotNull
@@ -32,14 +34,31 @@ public class Course {
     private String preRequisite;
 
     @NotNull
-    private String managerId; //doubt
+    private Integer managerId;
 
-    @OneToMany(mappedBy = "courseId", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @OneToMany( fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "courseId")
     private Set<Assessment> assessments;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "course")
+    Set<CandidateCourse> candidateCourseSet;
 
     @ManyToMany
     @JoinTable(name="Course_Candidate", joinColumns = {@JoinColumn(referencedColumnName = "courseId")}, inverseJoinColumns = {@JoinColumn(referencedColumnName = "candidateId")})
     private Set<Candidate>candidates;
 
 
+    public Course(Integer courseId){
+        this.courseId = courseId;
+    }
+
+    public Course(@NotNull Integer courseId, @NotNull @Size(min = 2, max = 50) String courseName, @NotNull @Size(min = 2, max = 100) String courseDescription, @NotNull String skill, @NotNull String preRequisite, @NotNull Integer managerId) {
+        this.courseId = courseId;
+        this.courseName = courseName;
+        this.courseDescription = courseDescription;
+        this.skill = skill;
+        this.preRequisite = preRequisite;
+        this.managerId = managerId;
+    }
 }

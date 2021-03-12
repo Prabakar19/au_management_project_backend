@@ -1,19 +1,15 @@
-package com.ms.au_management_project.dao;
+package com.ms.au_management_project.response;
 
-import com.ms.au_management_project.entity.Assessment;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
-
-import java.util.Set;
 
 @Setter
 @Getter
 @NoArgsConstructor
-@ToString
-public class ManagerDao {
-
+public class LoginResponse {
+    private boolean valid;
+    private String message;
     private Integer managerId;
 
     private String managerName;
@@ -22,9 +18,10 @@ public class ManagerDao {
 
     private String password;
 
-    private Set<Assessment> assessments;
 
-    public ManagerDao(Integer managerId, String managerName, String emailId, String password) {
+    public LoginResponse(boolean valid, String message, Integer managerId, String managerName, String emailId, String password) {
+        this.valid = valid;
+        this.message = message;
         this.managerId = managerId;
         this.managerName = managerName;
         this.emailId = emailId;
