@@ -7,10 +7,7 @@ import com.ms.au_management_project.response.TrainingMaterialResponse;
 import com.ms.au_management_project.service.AssessmentService;
 import com.ms.au_management_project.service.TrainingMaterialService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ByteArrayResource;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,21 +30,11 @@ public class TrainingMaterialController {
         if(assessmentResponse.isValid()){
             trainingMaterialDao.setAssessmentId(assessId);
             TrainingMaterialResponse trainingMaterialResponse = trainingMaterialService.addMaterial(trainingMaterialDao);
-            if(trainingMaterialResponse.isValid())
+            if(trainingMaterialResponse.isValid()) {
                 return new ResponseEntity<>(trainingMaterialResponse, HttpStatus.OK);
-            else
-                return new ResponseEntity<>(trainingMaterialResponse, HttpStatus.CONFLICT);
+            }
         }
         return new ResponseEntity<>(assessmentResponse, HttpStatus.BAD_REQUEST);
-    }
-
-    @GetMapping("/download/{id}")
-    public  ResponseEntity<ByteArrayResource> downloadFile(@PathVariable("id") Integer materialId){
-        TrainingMaterial trainingMaterial = trainingMaterialService.getMaterial(materialId);
-
-        return ResponseEntity.ok().contentType(MediaType.parseMediaType(trainingMaterial.getDocType()))
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment:filename=\"" + trainingMaterial.getDocName() + "\"")
-                .body(new ByteArrayResource(trainingMaterial.getMaterial()));
     }
 
     @GetMapping("/{id}")
@@ -62,7 +49,7 @@ public class TrainingMaterialController {
 
 
     @PutMapping("/id/{id}")
-    public  ResponseEntity<TrainingMaterialResponse> updateProject(@PathVariable("id") Integer projectId, @RequestBody TrainingMaterialDao trainingMaterialDao){
+    public  ResponseEntity<TrainingMaterialResponse> updateTrainingMaterial(@PathVariable("id") Integer projectId, @RequestBody TrainingMaterialDao trainingMaterialDao){
         TrainingMaterialResponse trainingMaterialResponse = trainingMaterialService.updateMaterial(projectId, trainingMaterialDao);
 
         if(trainingMaterialResponse.isValid())
@@ -72,7 +59,7 @@ public class TrainingMaterialController {
     }
 
     @DeleteMapping("/id/{id}")
-    public ResponseEntity<TrainingMaterialResponse> deleteProject(@PathVariable("id") Integer id){
+    public ResponseEntity<TrainingMaterialResponse> deleteTrainingMaterial(@PathVariable("id") Integer id){
         TrainingMaterialResponse trainingMaterialResponse = trainingMaterialService.deleteMaterial(id);
 
         if(trainingMaterialResponse.isValid())

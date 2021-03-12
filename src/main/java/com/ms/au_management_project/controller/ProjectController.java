@@ -31,10 +31,7 @@ public class ProjectController {
         if(assessmentResponse.isValid() && assessmentResponse.getType().equals("PROJECT")) {
             projectDao.setAssessmentId(assessId);
             Project project = new Project(projectDao.getAssessmentId(), projectDao.getTitle(), projectDao.getDescription(), projectDao.getBuildScore(), projectDao.getProcessScore(), projectDao.getTestingScore(), projectDao.getTotalScore());
-
-
             ProjectResponse projectResponse = projectService.addProject(project);
-
             if (projectResponse.isValid()) {
                 return new ResponseEntity<>(projectResponse, HttpStatus.OK);
             }
